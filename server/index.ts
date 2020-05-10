@@ -4,7 +4,6 @@ import LoginRouter from './auth/login.router';
 const app = express();
 require('dotenv').config();
 
-
 const { PORT } = process.env;
 const Router = express.Router();
 Router.use(['/auth/login'], LoginRouter);
