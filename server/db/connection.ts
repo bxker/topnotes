@@ -7,7 +7,7 @@ pool.on('error', function (err) {
     console.log('idle client error', err.message, err.stack)
 })
 
-export const query = (text: string) => {
-    let results = pool.query(text)
+export const query = (text: string, values?: any) => {
+    let results = pool.query(text, values)
     return results;
 }
