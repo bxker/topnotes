@@ -1,13 +1,18 @@
 import {Response} from 'express';
 import {getUser, login, register} from './auth.service';
+import {ExpressRequest} from '../types/index';
 
-export const getUserOnSession = async (req:any, res:Response) => {
-    let result = await getUser();
-    res.status(200).json(result);
+export const getUserOnSession = async (req:ExpressRequest, res:Response) => {
+   if(req){
+       res.status(200).json(req);
+   }else{
+       res.status(200).json('No user on session')
+   }
 };
 
-export const loginUser = async (req:any, res:Response) => {
+export const loginUser = async (req:ExpressRequest, res:Response) => {
     let {username, password} = req.body;
+    console.log(req)
     let user = await getUser(username, req);
     if(user === 'user not found'){
         res.status(403).json('that aint it chief');
@@ -28,7 +33,7 @@ export const loginUser = async (req:any, res:Response) => {
     }
 };
 
-export const registerUser = async (req:any, res:Response) => {
+export const registerUser = async (req:ExpressRequest, res:Response) => {
     let {first_name, last_name, email, username, password} = req.body;
     let results = await register(req, first_name, last_name, email, username, password);
     if(typeof(results) === 'string'){

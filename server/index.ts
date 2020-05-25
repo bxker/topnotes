@@ -1,11 +1,12 @@
 import express, {Request, Response} from 'express';
 import AuthRouter from './auth/auth.router';
 import session from 'express-session';
+let ss: any = process.env.SESSION_SECRET;
 
 const app = express();
 require('dotenv').config();
 
-const { PORT, SESSION_SECRET } = process.env;
+const { PORT } = process.env;
 const Router = express.Router();
 
 //routes
@@ -15,7 +16,7 @@ Router.use(['/auth/'], AuthRouter);
 app.use(express.json());
 app.use('/', AuthRouter);
 app.use(session({
-    secret: SESSION_SECRET,
+    secret: ss,
     resave: false,
     saveUninitialized: true,
     cookie: {

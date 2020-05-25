@@ -3,6 +3,7 @@
       "module": "CommonJS",
       "esModuleInterop": true,
       "strict": true,
+      "strictNullChecks": false,
       "resolveJsonModule": true,
       "target": "ES2018",
       "types": [
